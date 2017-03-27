@@ -1,6 +1,9 @@
-FROM cloudbees/cje-mm:2.32.2.6
+FROM cloudbees/cje-mm:2.32.3.1
 
-#set java opts variable to skip setup wizard; plugins will be installed via license activated script
-ENV JAVA_OPTS="-Djenkins.install.runSetupWizard=false"
+#skip setup wizard; per https://github.com/jenkinsci/docker/tree/master#preinstalling-plugins
+RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
 
-COPY ./license-activated/* /usr/share/jenkins/home/license-activated-or-renewed-after-expiration.groovy.d/
+ENV JENKINS_UC http://jenkins-updates.cloudbees.com
+COPY plugins.sh /usr/local/bin/plugins.sh
+COPY plugins.txt plugins.txt
+RUN plugins.sh plugins.txt
