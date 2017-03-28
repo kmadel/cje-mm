@@ -4,7 +4,9 @@ FROM cloudbees/cje-mm:2.32.3.1
 RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
 
 #install CloudBees suggested plugins
+COPY ./init.groovy.d/* /usr/share/jenkins/ref/init.groovy.d/
 COPY ./license-activated/* /usr/share/jenkins/ref/license-activated-or-renewed-after-expiration.groovy.d/
+COPY ./quickstart/* /usr/share/jenkins/ref/quickstart.groovy.d/
 
 #install additional plugins
 ENV JENKINS_UC http://jenkins-updates.cloudbees.com
