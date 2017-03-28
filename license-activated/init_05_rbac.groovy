@@ -8,6 +8,8 @@ import java.util.logging.Logger
 
 Logger logger = Logger.getLogger("init_05_rbac.groovy")
 
+def j = Jenkins.instance
+
 File disableScript = new File(j.rootDir, ".disable-init_05_rbac")
 if (disableScript.exists()) {//only run once
     logger.info("DISABLED init_05_rbac script")
@@ -21,7 +23,7 @@ if( env['DEV_GROUP'] != null || env['ADMIN_GROUP'] != null ) {
     def adminGroupName = "master_admins"
     def devRole = "develop"
     def devGroupNames = "master-devs"
-    GroupContainer container = GroupContainerLocator.locate(Jenkins.getInstance())
+    GroupContainer container = GroupContainerLocator.locate(j)
     if( env['ADMIN_GROUP'] != null ) {
         Group adminGroup = new Group(container, adminGroupName)
         adminGroup.doAddMember(env['ADMIN_GROUP'])
