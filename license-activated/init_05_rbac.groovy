@@ -22,7 +22,7 @@ if( env['DEV_GROUP'] != null || env['ADMIN_GROUP'] != null ) {
     def adminRole = "master-admin"
     def adminGroupName = "master_admins"
     def devRole = "develop"
-    def devGroupNames = "master-devs"
+    def devGroupName = "master-devs"
     GroupContainer container = GroupContainerLocator.locate(j)
     if( env['ADMIN_GROUP'] != null ) {
         Group adminGroup = new Group(container, adminGroupName)
